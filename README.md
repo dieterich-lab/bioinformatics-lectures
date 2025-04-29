@@ -19,6 +19,7 @@ Before the course, please consult these resources if needed:
 * [R Basics](http://swcarpentry.github.io/r-novice-inflammation) - Sections 1 to 4
 * Some Linux editor like [nano](https://staffwww.fullcoll.edu/sedwards/Nano/IntroToNano.html) or [vim](https://www.openvim.com)
 
+See also [further reading](https://github.com/dieterich-lab/bioinformatics-lectures/wiki/Further-Reading).
 
 **Note:** These links are being provided as a convenience and for informational purposes only; they do not constitute an endorsement or an approval by us of their content. We bear no responsibility for the accuracy of their content.
 
