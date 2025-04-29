@@ -8,7 +8,7 @@ This repository contains training material for an introductory lecture to bioinf
 
 #### Hardware/software requirements
 
-You need a functional laptop with *e.g.* eduroam connection, and WireGuard installed. 
+You need a functional laptop with *e.g.* eduroam connection, and WireGuard installed, see [Setting up wireGuard](https://github.com/dieterich-lab/bioinformatics-lectures/wiki/Preparation-Workshop). 
 
 #### General requirements
 
