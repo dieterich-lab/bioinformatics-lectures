@@ -19,7 +19,7 @@ Before the practical, consult these resources if needed:
 * [BASH shell basics](https://swcarpentry.github.io/shell-novice) or [command line tutorials](https://tutorials.ubuntu.com/tutorial/command-line-for-beginners)
 * [Python basics](https://swcarpentry.github.io/python-novice-inflammation) - Sections 1 to 5
 * [R Basics](http://swcarpentry.github.io/r-novice-inflammation) - Sections 1 to 4
-* How to use Linux editors like [nano](https://staffwww.fullcoll.edu/sedwards/Nano/IntroToNano.html) or [vim](https://www.openvim.com)
+* How to use Linux editors *e.g.* [vim](https://www.openvim.com)
 
 Consult the Wiki under [Further Reading](https://github.com/dieterich-lab/bioinformatics-lectures/wiki/Further-Reading) for additional references.
 

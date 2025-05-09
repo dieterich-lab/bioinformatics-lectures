@@ -37,7 +37,9 @@ The legend below provides the mapping of quality scores ([Phred-33](https://en.w
  
 ## Assessing quality with FastQC
 
-See `Makefile`.
+```bash
+make FASTQC
+```
 
 Several tools exist that help you with the documentation and QC assessment. Here, we used [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), and [MultiQC](https://multiqc.info/). As MultiQC is able to make a report from the output of many different tools, we are running it at a later stage, to integrate several QC metrics of the RNA-seq workflow.
 
@@ -67,9 +69,24 @@ The **"Overrepresented sequences"** table displays the sequences (at least 20 bp
 
 ***You should use FastQC as an indicator, don't take the "PASS" and "FAIL" too seriously!***
 
+## Quality control - trimming 
+
+```bash
+make FLEXBAR
+```
+
+We perform quality-based trimming, and adapter removal using [**FlexBar**](https://github.com/seqan/flexbar).
+This steps is important to make sure that the good quality reads have a chance to map/align to the genome, and that unwanted information is trimmed off (adapter sequences,poor quality bases at read ends, *etc.* )
+
+We are now ready for [mapping](alignment.md).
+
 ## Assessing quality metrics with MultiQC
 
-When we have run all rules of our workflow, we will have the results of MultiQC available.
+We will run MultiQC after aligning our data (rules `BOWTIE` and `STAR`), *cf.* [mapping](alignment.md). 
+
+```bash
+make MULTIQC
+```
 
 Important metrics to explore first are:
 
@@ -93,12 +110,6 @@ You can also have a look at the Flexbar output, to see how many reads are left f
 ### Exploring biases
 
 To further explore additional bias metrics, you can use tools such as [RSeQC](http://rseqc.sourceforge.net/)
-
-
-## Quality Control - Trimming 
-
-We perform quality-based trimming, and adapter removal using [**FlexBar**](https://github.com/seqan/flexbar).
-This steps is important to make sure that the good quality reads have a chance to map/align to the genome, and that unwanted information is trimmed off (adapter sequences,poor quality bases at read ends, *etc.* )
 
 
 ---

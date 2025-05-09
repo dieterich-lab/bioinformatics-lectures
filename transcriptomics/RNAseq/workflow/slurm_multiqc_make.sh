@@ -23,4 +23,4 @@ if [ ! $# == 4 ]; then
 fi
 
 
-multiqc $1 $2 $3 $4 -f
+multiqc $1 $2 $3 $4 -f -o local

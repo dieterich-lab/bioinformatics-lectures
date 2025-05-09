@@ -3,18 +3,29 @@
 
 ## Learning objectives:
 
-* Understand the basics of read alignment using [STAR](https://github.com/alexdobin/STAR).
+* Why we use [**bowtie2**](https://github.com/BenLangmead/bowtie2)
+* Understand the basics of read alignment using [STAR](https://github.com/alexdobin/STAR)
 * Automate mapping (using *e.g.* Makefile)
 * Familiarize with standard file formats
 
 
-## Read Alignment
+## Read alignment
 
 Read alignment is generally done using one of several splice-aware alignment tools such as [STAR](https://github.com/alexdobin/STAR) or [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml). The splice-aware feature is important for RNA-seq data, because we want an alignment tool that considers splice junctions when performing alignments.
  
 For this workshop we will be using STAR (Spliced Transcripts Alignment to a Reference).
 
-### STAR Alignment Strategy
+### In-silico rRNA removal
+
+Ribosomal ribonucleic acid (rRNA) removal is usually done during library preparation using *e.g.* ribosomal depletion or poly-A selection methods, depending on the experimental design and context. In-silico rRNA removal can be done in addition, before performing read alignment. This step is not strictly necessary, but this depends on the aim of the experiment, *e.g.* for Ribo-seq analysis, this is important.
+
+We use [**bowtie2**](https://github.com/BenLangmead/bowtie2), which can quickly align large sets of short sequences to large genomes (without gap alignment).
+
+```bash
+make BOWTIE
+```
+
+### STAR alignment strategy
 
 1. Seed searching
 2. Clustering, stitching, and scoring
@@ -58,13 +69,15 @@ Then the seeds are stitched together based on the best alignment for the read (s
 
 ### Running STAR
 
-
-See `Makefile`.
+```bash
+make STAR
+```
 
 For this workshop, we use a genome index that was already created. In general, you may have to run this step, if you are using STAR and/or a given genome for the first time. See STAR documentation.
 
+When this is completed, we can go back to [Assessing quality metrics with MultiQC](quality_assessment.md#assessing-quality-metrics-with-multiqc).
 
-### Alignment Outputs (SAM/BAM)
+### Alignment outputs (SAM/BAM)
 
 The output from STAR is a BAM file. BAM is a binary, compressed version of the SAM file, also known as *Sequence Alignment Map format*. The SAM file is a tab-delimited text file that contains information for each individual read and its alignment to the genome. See [hts-specs](https://samtools.github.io/hts-specs/) for more details.
 
@@ -130,7 +143,7 @@ The `FLAG` value that is displayed can be translated into information about the 
 Finally, you have the data from the original FASTQ file stored for each read. That is the raw sequence (`SEQ`) and the associated quality values for each position in the read (`QUAL`).
 
 
-## `samtools`
+## samtools
 
 [SAMtools](http://samtools.sourceforge.net/) is a tool that provides alot of functionality in dealing with SAM files. SAMtools utilities include, but are not limited to, viewing, sorting, filtering, merging, and indexing alignments in the SAM format. In this lesson we will explore a few of these utilities on our alignment files. To use this we need to load the module.
 
@@ -140,9 +153,8 @@ Finally, you have the data from the original FASTQ file stored for each read. Th
 We can use `samtools` to take a quick peek at our own files. Using the `view` command within `samtools` we can easily convert the BAM into something that we can understand. You will be returned to screen the entire SAM file, and so we can either write to file, or pipe this to the `less` command so we can scroll through it.
 
 
-```
-$ samtools view -h /pub/hbigs_course_2022/part1_RNAseq/full/star/SRR7451187__Rep_1__MP60-1__mRNA_Seq__PBS/Aligned.noS.bam | less
-
+```bash
+samtools view -h local/star/SRR7451187__Rep_1__MP60-1__mRNA_Seq__PBS/Aligned.noS.bam | less
 ``` 
 
 ## Visualization

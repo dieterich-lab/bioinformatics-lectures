@@ -21,4 +21,4 @@ fi
 mkdir -pv ${2}
 cd ${1}
 
-parallel --verbose -j1 ln -v -s ../${1}/{1}/Aligned.noS.bam ../${2}/{1}.bam ::: *
+parallel --verbose -j1 ln -v -s ../../${1}/{1}/Aligned.noS.bam ../../${2}/{1}.bam ::: *

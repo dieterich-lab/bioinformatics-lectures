@@ -115,7 +115,7 @@ isLongRead="TRUE",
 # number of CPU threads
 nthreads=opt$threads,
 # miscellaneous
-maxMOp=10,
+# maxMOp=10,
 #reportReads=TRUE,
 tmpDir=opt$tmp)
 
