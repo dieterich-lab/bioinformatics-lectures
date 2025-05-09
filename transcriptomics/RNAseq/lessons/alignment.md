@@ -3,7 +3,7 @@
 
 ## Learning objectives:
 
-* Why we use [**bowtie2**](https://github.com/BenLangmead/bowtie2)
+* Why we use [bowtie2](https://github.com/BenLangmead/bowtie2)
 * Understand the basics of read alignment using [STAR](https://github.com/alexdobin/STAR)
 * Automate mapping (using *e.g.* Makefile)
 * Familiarize with standard file formats

@@ -2,7 +2,7 @@
 
 ## Learning objectives:
 
-* To perform abundance estimation with [**subread/featurecount**](http://subread.sourceforge.net/)
+* To perform abundance estimation with [subread/featurecount](http://subread.sourceforge.net/)
 * To perform differential gene expression (DGE) analysis
 * Understand essential statistical concepts used to model gene expression
 

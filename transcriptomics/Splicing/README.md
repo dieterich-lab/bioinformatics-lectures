@@ -18,51 +18,78 @@ Participants will gain experience and skills to be able to:
 * Perform RNA-seq transcript level quantification using the Salmon software package
 * Perform DTU analysis using DRIMSeq
 
-----
-
-**TODO: UPDATE BELOW** 
-
 ### Dependencies
 
+All the core software that will be used in this part of the lecture is already available in the HPC cluster using the [environment modules](http://modules.sourceforge.net/). A [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environment has been setup with additional packages. To perform the analyses below, you need to activate the environment as follows:
+
+
 ```bash
-module load R
-module load XXX
-
-cd ~/hbigs_course_2022/part2_Splicing
-python3 -m venv splicing
-source splicing/bin/activate
-
-pip3 install --upgrade pip setuptools wheel
-pip install snakemake 
-pip install jupyter
+conda activate /biosw/bioinfo_2025_course/conda/transcriptomics
 ```
 
-Start a R-Console
+### Splicing workflow
+
+#### Workflow in detail
+
+1. Transcript-level abundance estimation with [Salmon](https://combine-lab.github.io/salmon/)
+2. Perform differential transcript usage (DTU) with [DRIMSeq](https://www.bioconductor.org/packages/release/bioc/html/DRIMSeq.html)
+
+All commands must be issued under the directory *bioinformatics-lectures/transcriptomics/Splicing* to work. Results will be written to a directory named *local*.
+
+##### Transcript-level abundance estimation
+
+**Note:** The first step is to generate the Salmon index, but this can take some time. To speed up the analysis, this has already been created. You should
+thus first create the *local* directory, and copy the index
+
 ```bash
+# assuming you are under $HOME/bioinformatics-lectures/transcriptomics/Splicing
+mkdir -p local/salmon
+ln -s /pub/bioinformatics-lectures/transcriptomics/Splicing/local/salmon/salmon_index local/salmon/salmon_index
+```
+
+We can then proceed with
+
+```bash
+snakemake --cores 10 all
+```
+
+Adapting `Snakemake` to a particular environment can entail many flags and options, and this is usually done using [configuration profiles](https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles). Profiles can also be used to specify resources to run jobs on a cluster. To keep things simple, and since we are using a small, downsampled dataset, we rely on a default, global profile, and are not submitting our jobs to the SLURM cluster middleware. This will also allow you to visualize interactively how `Snakemake` resolves the dependencies and create the required output.
+
+
+##### Differential transcript usage
+
+```bash
+python -m ipykernel install --user --name="transcriptomics-python"
+# start R-console
 R
-# register the kernel
-IRkernel::installspec(name='ir4.1.1', displayname='R4.1')
+```
+
+```R
+install.packages('IRkernel')
+IRkernel::installspec(name='R-practical', displayname='R-practical')
 ```
 
 We also need to modify the kernel spec
-```
+
+```bash
 jupyter kernelspec list
 ```
 
-Use the R kernel, *e.g.* `~/.local/share/jupyter/kernels/ir4.1.1/kernel.json`
+Use the R kernel created above, *e.g.* `~/.local/share/jupyter/kernels/r-practical/kernel.json`
 
-```
+```bash
 # add this line to the R kernel spec
-"env": {"R_LIBS":"/biosw/hbigs_course_2022_tbb/1.0.0/rlib"},
+"env": {"R_LIBS":"/biosw/bioinfo_2025_course/0.0.1/rlib/"},
 ```
 
 This should look like:
 
-```
+```json
 {
-  "argv": ["/biosw/R/4.1.1_deb10/lib/R/bin/R", "--slave", "-e", "IRkernel::main()", "--args", "{connection_file}"],
-  "env": {"R_LIBS":"/biosw/hbigs_course_2022_tbb/1.0.0/rlib"},
-  "display_name": "R4.1",
+  "argv": ["/biosw/bioinfo_2025_course/conda/transcriptomics/lib/R/bin/R", "--slave", "-e", "IRkernel::main()", "--args", "{connection_file}"],
+  "env": {"R_LIBS":"/biosw/bioinfo_2025_course/0.0.1/rlib/"},
+  "display_name": "R-practical",
   "language": "R"
 }
 ```
+

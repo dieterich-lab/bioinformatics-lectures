@@ -1,38 +1,34 @@
 """
-wget ftp://ftp.ensembl.org/pub/release-96/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
-gzip -d Homo_sapiens.GRCh38.cdna.all.fa.gz
-
 module load salmon
-snakemake --jobs 10 --printshellcmds
 """
 
 configfile: "config.yaml"
 
 rule all:
   input:
-    expand('salmon/{SAMPLE}/quant.sf', SAMPLE=config['sample'])
+    expand('local/salmon/{SAMPLE}/quant.sf', SAMPLE=config['sample'])
     
 rule salmon_index:
   input:
     config['fasta_reference']
   output:
-    directory("salmon/salmon_index/")
+    directory("local/salmon/salmon_index/")
   threads:
     10
   shell :
-    "salmon index -t {input} -i {output} -p {threads}"
+    "/biosw/salmon/1.9.0/bin/salmon index -t {input} -i {output} -p {threads}"
 
 rule salmon_quant:
   input:
-    "salmon/salmon_index/",
+    "local/salmon/salmon_index/",
     lambda wc: config['sample'][wc.SAMPLE]
   output:
-    "salmon/{SAMPLE}/quant.sf"
+    "local/salmon/{SAMPLE}/quant.sf"
   threads:
     10
   shell:
-    "salmon quant -p {threads} -i {input[0]} "
+    "/biosw/salmon/1.9.0/bin/salmon quant -p {threads} -i {input[0]} "
     "--libType A "
     "-1 <(gunzip -c {input[1]}) "
     "-2 <(gunzip -c {input[2]}) "
-    "-o salmon/{wildcards.SAMPLE}/"
+    "-o local/salmon/{wildcards.SAMPLE}/"

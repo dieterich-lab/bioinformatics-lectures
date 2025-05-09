@@ -3,7 +3,7 @@
 
 ## Learning objectives:
 
-* Evaluate the quality of NGS RNA-seq data using standard tools *e.g.* [**FastQC**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), or [**MultiQC**](https://multiqc.info/)
+* Evaluate the quality of NGS RNA-seq data using standard tools *e.g.* [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), or [MultiQC](https://multiqc.info/)
 * Automate quality assessment (using *e.g.* `Makefile`)
 * Familiarize with standard file formats
 
@@ -75,7 +75,7 @@ The **"Overrepresented sequences"** table displays the sequences (at least 20 bp
 make FLEXBAR
 ```
 
-We perform quality-based trimming, and adapter removal using [**FlexBar**](https://github.com/seqan/flexbar).
+We perform quality-based trimming, and adapter removal using [FlexBar](https://github.com/seqan/flexbar).
 This steps is important to make sure that the good quality reads have a chance to map/align to the genome, and that unwanted information is trimmed off (adapter sequences,poor quality bases at read ends, *etc.* )
 
 We are now ready for [mapping](alignment.md).

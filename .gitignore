@@ -234,6 +234,9 @@ TSWLatexianTemp*
 # vars
 local/
 
+# snakemake
+.snakemake
+
 # ipython, install
 .ipynb_checkpoints
 *checkpoint.ipynb

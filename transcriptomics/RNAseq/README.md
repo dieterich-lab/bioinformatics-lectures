@@ -56,11 +56,11 @@ under the directory *bioinformatics-lectures/transcriptomics/RNAseq/workflow* to
 
 #### Workflow in detail
 
-1. Quality assessment with [**MultiQC**](https://multiqc.info/)
-2. Removing sequencing adapters with [**FlexBar**](https://github.com/seqan/flexbar)
-3. Removal of ribosomal RNA with  [**bowtie2**](https://github.com/BenLangmead/bowtie2)
-4. Read mapping with  [**STAR**](https://github.com/alexdobin/STAR)
-5. Read-to-gene assignment (abundance estimation, or read counting) with [**subread/featurecount**](http://subread.sourceforge.net/)
+1. Quality assessment with [MultiQC](https://multiqc.info/)
+2. Removing sequencing adapters with [FlexBar](https://github.com/seqan/flexbar)
+3. Removal of ribosomal RNA with  [bowtie2](https://github.com/BenLangmead/bowtie2)
+4. Read mapping with  [STAR](https://github.com/alexdobin/STAR)
+5. Read-to-gene assignment (abundance estimation, or read counting) with [subread/featurecount](http://subread.sourceforge.net/)
 
 **Note:** The complete workflow, *i.e.* all rules can be called at once with `make all`, but we will call them one by one, and explain the different steps of the standard RNA-seq workflow. We will explore different aspects of this workflow using the following lessons: *(i)* [Quality assessment](lessons/quality_assessment.md), *(ii)* [Alignment](lessons/alignment.md), and finally *(iii)* [Read counting and DGE](lessons/dge.md).
 
