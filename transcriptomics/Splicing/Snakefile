@@ -1,20 +1,33 @@
-"""
-module load salmon
-"""
-
 configfile: "config.yaml"
+
+FASTA_REF=f"local/salmon/{config['fasta_reference']}"
 
 rule all:
   input:
     expand('local/salmon/{SAMPLE}/quant.sf', SAMPLE=config['sample'])
-    
+
+rule fasta:
+  output:
+    FASTA_REF
+  params:
+    ftp=config['fasta_ftp']
+  resources:
+    cpus_per_task = 1
+  shell:
+    """
+    mkdir -p local/salmon
+    wget {params.ftp} -O {output}.gz
+    gzip -d {output}.gz
+    """
+
 rule salmon_index:
   input:
-    config['fasta_reference']
+    FASTA_REF
   output:
     directory("local/salmon/salmon_index/")
-  threads:
-    10
+  threads: 3
+  resources:
+    cpus_per_task = 3
   shell :
     "/biosw/salmon/1.9.0/bin/salmon index -t {input} -i {output} -p {threads}"
 
@@ -24,8 +37,9 @@ rule salmon_quant:
     lambda wc: config['sample'][wc.SAMPLE]
   output:
     "local/salmon/{SAMPLE}/quant.sf"
-  threads:
-    10
+  threads: 10
+  resources:
+    cpus_per_task = 10
   shell:
     "/biosw/salmon/1.9.0/bin/salmon quant -p {threads} -i {input[0]} "
     "--libType A "

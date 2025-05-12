@@ -1,5 +1,7 @@
+fasta_ftp:
+    ftp://ftp.ensembl.org/pub/release-96/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
 fasta_reference:
-    /beegfs/biodb/genomes/homo_sapiens/GRCh38_96/GRCh38_96.fa
+    Homo_sapiens.GRCh38.cdna.all.fa
     
 sample:
     PBS_1:

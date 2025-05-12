@@ -22,5 +22,12 @@ We will run the analysis directly on the console
 ./dge_analysis.R
 ```
 
-Alternatively, you can open the [script](dge_analysis.R) on RStudio, modify the input/output directories, 
-and run the script. For running the analysis interactively, go to [https://r.internal](https://r.internal) and login using your LDAP credentials.
+Alternatively, you can run the analysis interactively, go to [https://r.internal](https://r.internal) and login using your LDAP credentials. **Use the latest R version.**
+
+**Note:** To be able to run the analysis on RStudio Server, you need to update the search paths for packages.
+
+```R
+.libPaths <- .libPaths( c( .libPaths(), "/biosw/bioinfo_2025_course/0.0.1/rlib/") )
+```
+
+You can then set the working directory to the current directory, open the [script](dge_analysis.R) on RStudio, and source from the GUI.

@@ -1,0 +1,13 @@
+jobs: 10
+
+default-resources:
+    slurm_account: "eboileau"
+    slurm_partition: "general"
+    mem_mb: 25000
+    runtime: 1440
+    cpus_per_task: 1
+
+set-threads:
+    fasta: 1
+    salmon_index: 3
+    salmon_quant: 10
