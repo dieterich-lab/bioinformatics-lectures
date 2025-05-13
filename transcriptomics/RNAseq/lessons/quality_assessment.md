@@ -106,6 +106,7 @@ You can also have a look at the Flexbar output, to see how many reads are left f
 
 **Note** Bowtie2 is used to perform *in silico* rRNA removal. Look at the output, and try to figure out what is happening!
 
+If we are satisfied with quality control, we can continue to [gene-level abundance estimation and differential gene expression (DGE) analysis](dge.md). 
 
 ### Exploring biases
 

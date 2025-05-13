@@ -23,6 +23,7 @@ Participants will gain experience and skills to be able to:
 All the core software that will be used in this part of the lecture is already available in the HPC cluster using the [environment modules](http://modules.sourceforge.net/). A Python virtual environment has been setup with additional packages. A virtual environment is a tool to help you keep dependencies and packages required by different projects separate and isolated from the system-wide installation. To perform the analyses below, you need to activate the environment as follows:
 
 ```bash
+# adjust year e.g. bioinfo_2025_course
 source /biosw/bioinfo_2025_course/python/splicing/bin/activate
 ```
 
@@ -43,12 +44,12 @@ All commands must be issued under the directory *bioinformatics-lectures/transcr
 
 ##### Transcript-level abundance estimation
 
-Check [Snakefile](Snakefile.R). There are three rules, one to download the reference sequence, one to generate the Salmon index, and the last rule to perform transcript abundance quantification.
+Check [Snakefile](Snakefile). There are three rules, one to download the reference sequence, one to generate the Salmon index, and the last rule to perform transcript abundance quantification.
 
-**Note:** Adapting `Snakemake` to a particular environment can entail many flags and options, and this is usually done using [configuration profiles](https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles). Profiles can also be used to specify resources to run jobs on a cluster. For this example, you need to update the SLURM profile under *profile/config.yaml* with your actual `slurm_account:` value.
+**Note:** Adapting `Snakemake` to a particular environment can entail many flags and options, and this is usually done using [configuration profiles](https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles). Profiles can also be used to specify resources to run jobs on a cluster. For this example, you need to update the SLURM profile under [profile/config.yaml](profile/config.yaml) with your actual `slurm_account:` value. Then run the following
 
 ```bash
-# assuming you are under $HOME/bioinformatics-lectures/transcriptomics/Splicing
+# assuming you are under bioinformatics-lectures/transcriptomics/Splicing
 snakemake --executor slurm --workflow-profile profile --printshellcmds --verbose &
 ```
 
@@ -60,13 +61,14 @@ We will run the analysis directly on the console
 ./DRIMSeq_analysis.R
 ```
 
-This will prepare the data for the analysis, run the statistical tests, and build a results table, one table with a single p-value per gene, which tests whether there is any differential transcript usage within the gene, and one table with a single p-value per transcript, which tests whether the proportions for this transcript changed within the gene. This will also plot the estimated proportions for one of the significant genes, where we can see evidence of switching, and write the results to *local/dtu*.
+This will prepare the data for the analysis, run the statistical tests, and build the results tables: one table with a single p-value per gene, which tests whether there is any differential transcript usage within the gene, and one table with a single p-value per transcript, which tests whether the proportions for this transcript change within the gene. The script will also plot the estimated proportions for one of the significant genes, where we can see evidence of switching, and write the results to *local/dtu*.
 
 Alternatively, you can run the analysis interactively, go to [https://r.internal](https://r.internal) and login using your LDAP credentials. **Use the latest R version.**
 
 **Note:** To be able to run the analysis on RStudio Server, you need to update the search paths for packages.
 
 ```R
+# adjust year e.g. bioinfo_2025_course
 .libPaths <- .libPaths( c( .libPaths(), "/biosw/bioinfo_2025_course/0.0.1/rlib/") )
 ```
 

@@ -64,33 +64,3 @@ under the directory *bioinformatics-lectures/transcriptomics/RNAseq/workflow* to
 
 **Note:** The complete workflow, *i.e.* all rules can be called at once with `make all`, but we will call them one by one, and explain the different steps of the standard RNA-seq workflow. We will explore different aspects of this workflow using the following lessons: *(i)* [Quality assessment](lessons/quality_assessment.md), *(ii)* [Alignment](lessons/alignment.md), and finally *(iii)* [Read counting and DGE](lessons/dge.md).
 
-#### Troubleshooting
-
-If selected R packages are missing, these can be installed as follows:
-
-```bash
-# the R module is already loaded, else 
-# module load R
-# start R-console
-R
-```
-
-```R
-# once in the R-console
-install.packages("optparse")
-
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install("Rsubread")
-```
-
-**Note:** It is possible that you are prompted with the following message, if you install libraries for the first time in your account
-
-```bash
-Warning in install.packages("optparse") :
-  'lib = "/beegfs/biosw/R/4.4.1_deb12/lib/R/library"' is not writable
-Would you like to use a personal library instead? (yes/No/cancel) 
-```
-
-You can safely answer `yes` to these questions. The R packages will be installed locally in your `$HOME` directory.
-After installing packages, to quit the R-console, just type `quit()`. You don't need to save your workspace.
